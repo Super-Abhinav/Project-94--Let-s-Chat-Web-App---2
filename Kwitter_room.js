@@ -10,6 +10,7 @@ function Logout() {
 const firebaseConfig = {
       apiKey: "AIzaSyCnXS8Fn8Y7WaMXSbAacvF8R-38kwFqq2M",
       authDomain: "kwitter-webapp---project.firebaseapp.com",
+      databaseURL: "https://kwitter-webapp---project-default-rtdb.firebaseio.com",
       projectId: "kwitter-webapp---project",
       storageBucket: "kwitter-webapp---project.appspot.com",
       messagingSenderId: "624110386371",
@@ -18,6 +19,18 @@ const firebaseConfig = {
     
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
+
+function addRoom() {
+      room_name = document.getElementById("room_name").value;
+
+      firebase.database().ref("/").child(room_name).update({
+            purpose : "adding room name"
+      });
+
+      localStorage.setItem("room_name", room_name);
+
+      windows.location = "kwitter_page.html";
+}
     
 function getData() {firebase.database().ref("/").on('value', function(snapshot) {document.getElementById("output").innerHTML = "";snapshot.forEach(function(childSnapshot) {childKey  = childSnapshot.key;
        Room_names = childKey;
